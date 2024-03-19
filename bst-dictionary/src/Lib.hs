@@ -8,7 +8,12 @@ data BST key item = Node key item (BST key item) (BST key item) | Empty
 emptyTree :: BST key item
 emptyTree = Empty
 
-insert :: key -> item -> BST key item -> BST key item
+insert :: Ord key => key -> item -> BST key item -> BST key item
 insert newKey newItem Empty = Node newKey newItem Empty Empty
-insert newKey newItem (Node item key leftChild rightChild) = Node item key (insert newKey newItem leftChild) rightChild
+insert newKey newItem (Node key item leftChild rightChild) = 
+    if newKey < key
+      then Node key item (insert newKey newItem leftChild) rightChild
+    else if newKey > key
+      then Node key item leftChild (insert newKey newItem rightChild)
+    else emptyTree
 insert _      _       _     = emptyTree
