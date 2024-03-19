@@ -10,3 +10,4 @@ emptyTree = Empty
 
 insert :: key -> item -> BST key item -> BST key item
 insert newKey newItem Empty = Node newKey newItem Empty Empty
+insert _      _       _     = emptyTree
