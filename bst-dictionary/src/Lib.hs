@@ -1,12 +1,12 @@
 module Lib where
 
 
-data BST = Node Int String (BST) (BST) | Empty
+data BST key item = Node key item (BST key item) (BST key item) | Empty
     deriving (Eq, Show)
 
 
-emptyTree :: BST
+emptyTree :: BST key item
 emptyTree = Empty
 
-insert :: Int -> String -> BST -> BST
+insert :: key -> item -> BST key item -> BST key item
 insert newKey newItem Empty = Node newKey newItem Empty Empty
