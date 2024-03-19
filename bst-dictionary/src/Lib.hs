@@ -10,4 +10,5 @@ emptyTree = Empty
 
 insert :: key -> item -> BST key item -> BST key item
 insert newKey newItem Empty = Node newKey newItem Empty Empty
+insert newKey newItem (Node item key leftChild rightChild) = Node item key (insert newKey newItem leftChild) rightChild
 insert _      _       _     = emptyTree
