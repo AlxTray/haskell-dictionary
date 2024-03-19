@@ -9,4 +9,4 @@ emptyTree :: BST
 emptyTree = Empty
 
 insert :: Int -> String -> BST -> BST
-insert newKey newItem oldBST = emptyTree
+insert newKey newItem Empty = Node newKey newItem Empty Empty
