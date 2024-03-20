@@ -14,4 +14,3 @@ insert newKey newItem (Node key item leftChild rightChild)
     | newKey < key = Node key item (insert newKey newItem leftChild) rightChild
     | newKey > key = Node key item leftChild (insert newKey newItem rightChild)
     | newKey == key = Node key newItem leftChild rightChild
-insert _      _       _     = emptyTree
