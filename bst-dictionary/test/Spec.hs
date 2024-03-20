@@ -1,6 +1,10 @@
 import Test.HUnit
 import Lib
 
+import Prelude hiding (lookup)
+import Data.Maybe
+
+
 testEmptyInsert :: Test
 testEmptyInsert = TestCase $ do
     let tree = insert 1 "Alex" emptyTree
@@ -25,12 +29,21 @@ testInsertEqual = TestCase $ do
     assertEqual "Test to see insert with a key equal must overwrite item of equivalent node" tree expectedTree
 
 
+testEmptyLookup :: Test
+testEmptyLookup = TestCase $ do
+    let tree = emptyTree
+    let lookupResult = lookup 1 tree
+    assertBool "Test to see that lookup on empty tree returns nothing" (isNothing lookupResult)
+
+
 allTests :: Test
 allTests = TestList [
     testEmptyInsert,
     testInsertOnLeft,
     testInsertOnRight,
-    testInsertEqual
+    testInsertEqual,
+
+    testEmptyLookup
  ]
 
 
