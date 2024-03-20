@@ -18,12 +18,19 @@ testInsertOnRight = TestCase $ do
     let expectedTree = (Node 5 "Dave" Empty (Node 10 "Jeff" Empty Empty))
     assertEqual "Test to see insert with a key more than parent is inserted on right" tree expectedTree
 
+testInsertEqual :: Test
+testInsertEqual = TestCase $ do
+    let tree = insert 1 "Dave" (insert 1 "Jeff" emptyTree)
+    let expectedTree = (Node 1 "Dave" Empty Empty)
+    assertEqual "Test to see insert with a key equal must overwrite item of equivalent node" tree expectedTree
+
 
 allTests :: Test
 allTests = TestList [
     testEmptyInsert,
     testInsertOnLeft,
-    testInsertOnRight
+    testInsertOnRight,
+    testInsertEqual
  ]
 
 
