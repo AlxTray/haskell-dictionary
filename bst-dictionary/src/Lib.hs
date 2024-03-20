@@ -1,5 +1,7 @@
 module Lib where
 
+import Prelude hiding (lookup)
+
 
 data BST key item = Node key item (BST key item) (BST key item) | Empty
     deriving (Eq, Show)
@@ -15,6 +17,10 @@ insert newKey newItem (Node key item leftChild rightChild)
     | newKey > key = Node key item leftChild (insert newKey newItem rightChild)
     | newKey == key = Node key newItem leftChild rightChild
 
-lookup :: key -> BST key item -> Maybe item
+lookup :: Ord key => key -> BST key item -> Maybe item
 lookup soughtKey Empty = Nothing
+lookup soughtKey (Node key item leftChild rightChild)
+    | soughtKey < key  = lookup soughtKey leftChild
+    | soughtKey > key  = lookup soughtKey rightChild
+    | soughtKey == key = Just item
 lookup _         _     = undefined
