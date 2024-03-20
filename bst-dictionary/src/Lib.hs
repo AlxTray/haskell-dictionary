@@ -16,4 +16,5 @@ insert newKey newItem (Node key item leftChild rightChild)
     | newKey == key = Node key newItem leftChild rightChild
 
 lookup :: key -> BST key item -> Maybe item
-lookup _ _ = undefined
+lookup soughtKey Empty = Nothing
+lookup _         _     = undefined
