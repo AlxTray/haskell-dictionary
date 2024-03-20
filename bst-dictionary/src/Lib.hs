@@ -23,4 +23,3 @@ lookup soughtKey (Node key item leftChild rightChild)
     | soughtKey < key  = lookup soughtKey leftChild
     | soughtKey > key  = lookup soughtKey rightChild
     | soughtKey == key = Just item
-lookup _         _     = undefined
