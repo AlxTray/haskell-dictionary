@@ -48,6 +48,12 @@ testEmptyList = TestCase $ do
     let returnedList = list tree
     assertBool "Test to see that listing an empty tree returns an empty list" (null returnedList)
 
+testListSingleNode :: Test
+testListSingleNode = TestCase $ do
+    let tree = Node 1 "Dave" Empty Empty
+    let expectedList = [(1, "Dave")]
+    assertEqual "Test to see listing a tree with single node returns list of single pair" (list tree) expectedList
+
 
 allTests :: Test
 allTests = TestList [
@@ -59,7 +65,8 @@ allTests = TestList [
     testEmptyLookup,
     testLookupKeyExists,
 
-    testEmptyList
+    testEmptyList,
+    testListSingleNode
  ]
 
 
