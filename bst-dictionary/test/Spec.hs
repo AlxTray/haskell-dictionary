@@ -71,6 +71,12 @@ testRemoveSingleRoot = TestCase $ do
     let tree = Node 1 "Dave" Empty Empty
     assertEqual "Test to see if removing tree with only root returns an empty tree" (remove 1 tree) Empty
 
+testRemoveSingleChild :: Test
+testRemoveSingleChild = TestCase $ do
+    let tree = Node 10 "Dave" (Node 5 "Jeff" (Node 3 "Steve" Empty Empty) Empty) (Node 15 "Alex" Empty Empty)
+    let expectedTree = Node 10 "Dave" (Node 3 "Steve" Empty Empty) (Node 15 "Alex" Empty Empty)
+    assertEqual "Test to see removing node with single child gets replaced by that child" (remove 5 tree) expectedTree
+
 
 allTests :: Test
 allTests = TestList [
@@ -87,7 +93,8 @@ allTests = TestList [
     testListManyNodes,
 
     testEmptyRemove,
-    testRemoveSingleRoot
+    testRemoveSingleRoot,
+    testRemoveSingleChild
  ]
 
 
