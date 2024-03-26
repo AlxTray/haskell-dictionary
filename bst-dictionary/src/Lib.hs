@@ -30,3 +30,4 @@ list (Node key item leftChild rightChild) = list leftChild ++ [(key, item)] ++ l
 
 remove :: key -> BST key item -> BST key item
 remove _ Empty = Empty
+remove removeKey (Node key item leftChild rightChild) = Empty
