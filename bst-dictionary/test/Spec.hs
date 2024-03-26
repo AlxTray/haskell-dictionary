@@ -54,6 +54,12 @@ testListSingleNode = TestCase $ do
     let expectedList = [(1, "Dave")]
     assertEqual "Test to see listing a tree with single node returns list of single pair" (list tree) expectedList
 
+testListManyNodes :: Test
+testListManyNodes = TestCase $ do
+    let tree = Node 10 "Dave" (Node 5 "Jeff" Empty Empty) (Node 15 "Alex" Empty Empty)
+    let expectedList = [(5, "Jeff"), (10, "Dave"), (15, "Alex")]
+    assertEqual "Test to see listing a tree with many nodes returns list of all nodes in order" (list tree) expectedList
+
 
 allTests :: Test
 allTests = TestList [
@@ -66,7 +72,8 @@ allTests = TestList [
     testLookupKeyExists,
 
     testEmptyList,
-    testListSingleNode
+    testListSingleNode,
+    testListManyNodes
  ]
 
 
