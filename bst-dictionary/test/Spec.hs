@@ -61,6 +61,12 @@ testListManyNodes = TestCase $ do
     assertEqual "Test to see listing a tree with many nodes returns list of all nodes in order" (list tree) expectedList
 
 
+testEmptyRemove :: Test
+testEmptyRemove = TestCase $ do
+    let tree = emptyTree
+    assertEqual "Test to see attempt to remove on empty tree returns empty tree" (remove 1 tree) (Empty :: BST Int String)
+
+
 allTests :: Test
 allTests = TestList [
     testEmptyInsert,
@@ -73,7 +79,9 @@ allTests = TestList [
 
     testEmptyList,
     testListSingleNode,
-    testListManyNodes
+    testListManyNodes,
+
+    testEmptyRemove
  ]
 
 
