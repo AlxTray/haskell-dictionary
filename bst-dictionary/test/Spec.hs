@@ -42,6 +42,13 @@ testLookupKeyExists = TestCase $ do
     assertEqual "Test to see that lookup with key existing returns item" lookupResult (Just "Alex")
 
 
+testEmptyList :: Test
+testEmptyList = TestCase $ do
+    let tree = emptyTree
+    let returnedList = list tree
+    assertBool "Test to see that listing an empty tree returns an empty list" (null returnedList)
+
+
 allTests :: Test
 allTests = TestList [
     testEmptyInsert,
@@ -50,7 +57,9 @@ allTests = TestList [
     testInsertEqual,
 
     testEmptyLookup,
-    testLookupKeyExists
+    testLookupKeyExists,
+
+    testEmptyList
  ]
 
 
