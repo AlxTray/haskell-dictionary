@@ -66,6 +66,11 @@ testEmptyRemove = TestCase $ do
     let tree = emptyTree
     assertEqual "Test to see attempt to remove on empty tree returns empty tree" (remove 1 tree) (Empty :: BST Int String)
 
+testRemoveSingleRoot :: Test
+testRemoveSingleRoot = TestCase $ do
+    let tree = Node 1 "Dave" Empty Empty
+    assertEqual "Test to see if removing tree with only root returns an empty tree" (remove 1 tree) Empty
+
 
 allTests :: Test
 allTests = TestList [
@@ -81,7 +86,8 @@ allTests = TestList [
     testListSingleNode,
     testListManyNodes,
 
-    testEmptyRemove
+    testEmptyRemove,
+    testRemoveSingleRoot
  ]
 
 
