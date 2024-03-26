@@ -26,4 +26,4 @@ lookup soughtKey (Node key item leftChild rightChild)
 
 list :: BST key item -> [(key, item)]
 list Empty = []
-list (Node key item leftChild rightChild) = [(key, item)]
+list (Node key item leftChild rightChild) = list leftChild ++ [(key, item)] ++ list rightChild
