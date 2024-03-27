@@ -28,6 +28,7 @@ list :: BST key item -> [(key, item)]
 list Empty = []
 list (Node key item leftChild rightChild) = list leftChild ++ [(key, item)] ++ list rightChild
 
+
 remove :: (Ord key, Eq item) => key -> BST key item -> BST key item
 remove _ Empty = Empty
 remove removeKey (Node key item leftChild rightChild)
@@ -37,5 +38,11 @@ remove removeKey (Node key item leftChild rightChild)
                             then rightChild
                          else if rightChild == Empty
                             then leftChild
-                         else Empty
+                         else
+                            let replacementNode = findMinimumNode leftChild
+                            in Node (fst replacementNode) (snd replacementNode) (remove (fst replacementNode) leftChild) rightChild
+
+findMinimumNode :: BST key item -> (key, item)
+findMinimumNode (Node key item leftChild Empty) = (key, item)
+findMinimumNode (Node _ _ _ rightChild) = findMinimumNode rightChild
 
