@@ -34,15 +34,13 @@ remove _ Empty = Empty
 remove removeKey (Node key item leftChild rightChild)
     | removeKey < key  = Node key item (remove removeKey leftChild) rightChild
     | removeKey > key  = Node key item leftChild (remove removeKey rightChild)
-    | removeKey == key = if leftChild == Empty
-                            then rightChild
-                         else if rightChild == Empty
-                            then leftChild
-                         else
-                            let replacementNode = findMinimumNode leftChild
-                            in Node (fst replacementNode) (snd replacementNode) (remove (fst replacementNode) leftChild) rightChild
+    | removeKey == key = case (leftChild, rightChild) of
+                              (Empty,     _)     -> rightChild
+                              (_,         Empty) -> leftChild
+                              (_,         _)     -> let replacementNode = findMinimumNode leftChild
+                                                    in Node (fst replacementNode) (snd replacementNode) (remove (fst replacementNode) leftChild) rightChild
 
 findMinimumNode :: BST key item -> (key, item)
-findMinimumNode (Node key item leftChild Empty) = (key, item)
+findMinimumNode (Node key item _ Empty) = (key, item)
 findMinimumNode (Node _ _ _ rightChild) = findMinimumNode rightChild
 
