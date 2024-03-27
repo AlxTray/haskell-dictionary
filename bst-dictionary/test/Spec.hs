@@ -84,6 +84,12 @@ testRemoveBothChildren = TestCase $ do
     assertEqual "Test to see removing node with both children should get replaced by in-order predecessor" (remove 6 tree) expectedTree
 
 
+testEmptyPredicateRemove :: Test
+testEmptyPredicateRemove = TestCase $ do
+    let tree = emptyTree
+    assertEqual "Test to see that removing by predicate on an empty tree returns an empty tree" (removeAll (>0) tree) (Empty :: BST Int String)
+
+
 allTests :: Test
 allTests = TestList [
     testEmptyInsert,
@@ -101,7 +107,9 @@ allTests = TestList [
     testEmptyRemove,
     testRemoveSingleRoot,
     testRemoveSingleChild,
-    testRemoveBothChildren
+    testRemoveBothChildren,
+
+    testEmptyPredicateRemove
  ]
 
 

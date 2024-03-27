@@ -44,3 +44,7 @@ findMinimumNode :: BST key item -> (key, item)
 findMinimumNode (Node key item _ Empty) = (key, item)
 findMinimumNode (Node _ _ _ rightChild) = findMinimumNode rightChild
 
+
+removeAll :: (key -> Bool) -> BST key item -> BST key item
+removeAll _ _ = undefined
+
