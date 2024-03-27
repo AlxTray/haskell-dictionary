@@ -77,6 +77,12 @@ testRemoveSingleChild = TestCase $ do
     let expectedTree = Node 10 "Dave" (Node 3 "Steve" Empty Empty) (Node 15 "Alex" Empty Empty)
     assertEqual "Test to see removing node with single child gets replaced by that child" (remove 5 tree) expectedTree
 
+testRemoveBothChildren :: Test
+testRemoveBothChildren = TestCase $ do
+    let tree = Node 10 "Dave" (Node 6 "Jeff" (Node 3 "Steve" (Node 2 "Andrew" Empty Empty) (Node 4 "James" Empty (Node 5 "Ben" Empty Empty))) (Node 8 "Sam" Empty Empty)) (Node 15 "Alex" Empty Empty)
+    let expectedTree = Node 10 "Dave" (Node 5 "Ben" (Node 3 "Steve" (Node 2 "Andrew" Empty Empty) (Node 4 "James" Empty Empty)) (Node 8 "Sam" Empty Empty)) (Node 15 "Alex" Empty Empty)
+    assertEqual "Test to see removing node with both children should get replaced by in-order predecessor" (remove 6 tree) expectedTree
+
 
 allTests :: Test
 allTests = TestList [
@@ -94,7 +100,8 @@ allTests = TestList [
 
     testEmptyRemove,
     testRemoveSingleRoot,
-    testRemoveSingleChild
+    testRemoveSingleChild,
+    testRemoveBothChildren
  ]
 
 
