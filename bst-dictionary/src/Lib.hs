@@ -28,6 +28,14 @@ list :: BST key item -> [(key, item)]
 list Empty = []
 list (Node key item leftChild rightChild) = list leftChild ++ [(key, item)] ++ list rightChild
 
-remove :: key -> BST key item -> BST key item
+remove :: (Ord key, Eq item) => key -> BST key item -> BST key item
 remove _ Empty = Empty
-remove removeKey (Node key item leftChild rightChild) = Empty
+remove removeKey (Node key item leftChild rightChild)
+    | removeKey < key  = Node key item (remove removeKey leftChild) rightChild
+    | removeKey > key  = Node key item leftChild (remove removeKey rightChild)
+    | removeKey == key = if leftChild == Empty
+                            then rightChild
+                         else if rightChild == Empty
+                            then leftChild
+                         else Empty
+
