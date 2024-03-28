@@ -89,6 +89,11 @@ testEmptyPredicateRemove = TestCase $ do
     let tree = emptyTree
     assertEqual "Test to see that removing by predicate on an empty tree returns an empty tree" (removeAll (>0) tree) (Empty :: BST Int String)
 
+testPredicateRemoveAllMatch :: Test
+testPredicateRemoveAllMatch = TestCase $ do
+    let tree = Node 10 "Dave" (Node 6 "Jeff" (Node 3 "Steve" (Node 2 "Andrew" Empty Empty) (Node 4 "James" Empty (Node 5 "Ben" Empty Empty))) (Node 8 "Sam" Empty Empty)) (Node 15 "Alex" Empty Empty)
+    assertEqual "Test to see that an empty tree is returned when all keys match predicate" (removeAll (<20) tree) (Empty :: BST Int String)
+
 
 allTests :: Test
 allTests = TestList [
@@ -109,7 +114,8 @@ allTests = TestList [
     testRemoveSingleChild,
     testRemoveBothChildren,
 
-    testEmptyPredicateRemove
+    testEmptyPredicateRemove,
+    testPredicateRemoveAllMatch
  ]
 
 
