@@ -13,8 +13,8 @@ emptyTree = Empty
 insert :: Ord key => key -> item -> BST key item -> BST key item
 insert newKey newItem Empty = Node newKey newItem Empty Empty
 insert newKey newItem (Node key item leftChild rightChild) 
-    | newKey < key = Node key item (insert newKey newItem leftChild) rightChild
-    | newKey > key = Node key item leftChild (insert newKey newItem rightChild)
+    | newKey < key  = Node key item (insert newKey newItem leftChild) rightChild
+    | newKey > key  = Node key item leftChild (insert newKey newItem rightChild)
     | newKey == key = Node key newItem leftChild rightChild
 
 lookup :: Ord key => key -> BST key item -> Maybe item
@@ -46,7 +46,8 @@ findMinimumNode (Node _ _ _ rightChild) = findMinimumNode rightChild
 
 
 removeAll :: (Ord key, Eq item) => (key -> Bool) -> BST key item -> BST key item
-removeAll _ Empty = Empty
+removeAll _         Empty = Empty
 removeAll predicate (Node key item leftChild rightChild)
-    | predicate key = remove key (Node key item (removeAll predicate leftChild) (removeAll predicate rightChild)) 
+    | predicate key = remove key (Node key item (removeAll predicate leftChild) (removeAll predicate rightChild))
+    | otherwise     = Node key item (removeAll predicate leftChild) (removeAll predicate rightChild)
 
