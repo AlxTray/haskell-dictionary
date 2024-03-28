@@ -94,6 +94,12 @@ testPredicateRemoveAllMatch = TestCase $ do
     let tree = Node 10 "Dave" (Node 6 "Jeff" (Node 3 "Steve" (Node 2 "Andrew" Empty Empty) (Node 4 "James" Empty (Node 5 "Ben" Empty Empty))) (Node 8 "Sam" Empty Empty)) (Node 15 "Alex" Empty Empty)
     assertEqual "Test to see that an empty tree is returned when all keys match predicate" (removeAll (<20) tree) (Empty :: BST Int String)
 
+testPredicateRemoveSomeMatch :: Test
+testPredicateRemoveSomeMatch = TestCase $ do
+    let tree = Node 10 "Dave" (Node 6 "Jeff" (Node 3 "Steve" (Node 2 "Andrew" Empty Empty) (Node 4 "James" Empty (Node 5 "Ben" Empty Empty))) (Node 8 "Sam" Empty Empty)) (Node 15 "Alex" Empty Empty)
+    let expectedTree = Node 5 "Ben" (Node 3 "Steve" Empty Empty) (Node 15 "Alex" Empty Empty)
+    assertEqual "Test to see that tree contains only nodes that were not removed" (removeAll (\x -> x `mod` 2 == 0) tree) expectedTree
+
 
 allTests :: Test
 allTests = TestList [
@@ -115,7 +121,8 @@ allTests = TestList [
     testRemoveBothChildren,
 
     testEmptyPredicateRemove,
-    testPredicateRemoveAllMatch
+    testPredicateRemoveAllMatch,
+    testPredicateRemoveSomeMatch
  ]
 
 
