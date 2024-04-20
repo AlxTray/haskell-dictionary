@@ -1,4 +1,4 @@
-module Lib where
+module BST where
 
 import Prelude hiding (lookup)
 

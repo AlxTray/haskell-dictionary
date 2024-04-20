@@ -58,3 +58,7 @@ tests:
     dependencies:
     - bst-dictionary
     - HUnit
+    - QuickCheck
+    - tasty
+    - tasty-quickcheck
+    - tasty-hunit
