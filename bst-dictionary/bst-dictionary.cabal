@@ -69,6 +69,7 @@ test-suite bst-dictionary-test
     , QuickCheck
     , base >=4.7 && <5
     , bst-dictionary
+    , containers
     , tasty
     , tasty-hunit
     , tasty-quickcheck
